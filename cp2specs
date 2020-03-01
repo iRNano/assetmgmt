@@ -1,0 +1,27 @@
+
+Capstone 2 specifications
+Create an asset management system with the following specifications
+1. Use laravel framework, but make not look like a laravel site
+2. Asset functionality
+	Add asset
+	Retrieve assets
+	Update assets
+	Delete assets
+	*Search assets
+	*Filter assets
+3. Transactions functionality
+	Add asset to transaction
+	View transaction
+	Edit transaction item
+	Delete transaction item
+	Submit transaction request
+4. Transaction history
+	View history
+	Admin: (approve or reject transaction, search transaction, filter transaction)
+	User: (once transaction is approved, return assets to admin)
+5. Other functionalities
+	User login/registration 
+	Dashboards for admin and catalog for regular user
+	Authorization on pages
+6. Project should be hosted in heroku and remotemysql
+Bootcamp Dynamic Learning Environment

@@ -49661,8 +49661,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/zuittday/Documents/valdepenas-adrian/asset-management/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/zuittday/Documents/valdepenas-adrian/asset-management/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/adrianvaldepenas/Documents/zuitt/asset-mgmt/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/adrianvaldepenas/Documents/zuitt/asset-mgmt/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
