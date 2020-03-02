@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Asset;
+use App\AssetDetail;
 use Illuminate\Http\Request;
 
 class AssetController extends Controller
@@ -39,22 +40,28 @@ class AssetController extends Controller
     {
         
         $asset = new Asset();
-        $asset->name = $request->name;
+        $assetDetail = new AssetDetail();
+        // $asset->name = $request->name;
         $asset->category_id = $request->category;
         $asset->brand = $request->brand;
-        $asset->os = $request->os;
-        $asset->specs = $request->specs;
         $asset->model = $request->model;
-        $asset->serial_number = $request->serial_number;
-        $asset->purchase_date = $request->purchase_date;
-        $asset->warranty_date = $request->warranty_date;
-        if($request->category = 7){
-            $asset->no_of_users = $request->no_of_users;
-            $asset->license = $request->license;
-            $asset->platform = $request->platform;
-        }
-
+        
+        //asset details
         $asset->save();
+
+        // // $assetDetail->asset_id = $asset->id;
+        // // $assetDetail->specs = $request->specs;
+        // // $assetDetail->os = $request->os;
+        // // $assetDetail->serial_number = $request->serial_number;
+        // // $assetDetail->purchase_date = $request->purchase_date;
+        // // $assetDetail->warranty_date = $request->warranty_date;
+        // // if($request->category = 7){
+        // //     $assetDetail->no_of_users = $request->no_of_users;
+        // //     $assetDetail->license = $request->license;
+        // //     $assetDetail->platform = $request->platform;
+        // // }
+
+        // $assetDetail->save();
 
         return redirect('/assets');
     }
@@ -67,8 +74,8 @@ class AssetController extends Controller
      */
     public function show(Asset $asset)
     {   
-
-        return view('assets.show', compact('asset'));
+        $assetDetails = AssetDetail::where('asset_id', $asset->id)->get();
+        return view('assets.show', compact('asset', 'assetDetails'));
     }
 
     /**

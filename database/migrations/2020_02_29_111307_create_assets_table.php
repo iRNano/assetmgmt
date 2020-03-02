@@ -15,21 +15,19 @@ class CreateAssetsTable extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            // $table->string('name');
             $table->unsignedBigInteger('category_id');
-            $table->text('os')->nullable();
             $table->string('brand');
-            $table->string('model');
-            $table->text('specs')->nullable();
-            $table->string('platform')->nullable();
-            $table->string('license')->nullable();
-            $table->integer('no_of_users')->nullable();
-            $table->string('serial_number')->unique();
-            $table->date('purchase_date');
-            $table->date('warranty_date');
+            $table->string('model')->unique();
             $table->boolean('isActive')->default(true);
-            $table->unsignedBigInteger('status_id');
             $table->timestamps();
+
+            //foreign key category_id
+            $table->foreign('category_id')
+            ->references('id')
+            ->on('categories')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
         });
     }
 

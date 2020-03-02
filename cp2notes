@@ -6,3 +6,35 @@ Marketing (including the selling function)
 Human Resource Management
 Accounting and Finance.
 IT
+
+
+---Soft deletes
+
+php artisan make:migration add_soft_deletes_to_products --table=products
+
+public function up(){
+	Schema::table('products', function(Blueprint $table){
+		$table->softDeletes(); --> when this is migrated, a new column called deleted_at will be added to the products table
+	}
+}
+
+----
+
+To add softdeletes
+
+1. Migration
+	php artisan make:migration add_soft_deletes_to_products --table=products
+	add a deleted_at column in the table by creating 
+	$table->softDeletes();
+2. Model
+	Add the use SoftDeletes in both the function and the use Illuminate/.../SoftDeletes;
+
+To pull data that is softdeleted:
+<Model>::withTrashed() -> includes all the deleted items in the database
+
+To check if the data is softdeleted
+ex. if($product->trashed())
+
+To restore data:
+use the restore method
+Product::withTrashed()->find('id', $id)->restore();

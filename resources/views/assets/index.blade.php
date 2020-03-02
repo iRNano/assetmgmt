@@ -8,15 +8,18 @@
             
                 <table class="table table-striped">
                     <thead>
-                        <th>Asset Name</th>
+                        {{-- <th>Asset Name</th> --}}
                         <th>Asset Type</th>
+                        <th>Asset Brand</th>
+                        <th>Asset Model</th>
                         <th>Action</th>
                     </thead>
                     <tbody>
                         @foreach($assets as $asset) 
                             <tr>
-                                <td>{{$asset->name}}</td>
                                 <td>{{$asset->category->name}}</td>
+                                <td>{{$asset->brand}}</td>
+                                <td>{{$asset->model}}</td>
                                 <td>
                                     <a href="/assets/{{$asset->id}}" class="btn btn-info">Details</a>
                                 </td>
