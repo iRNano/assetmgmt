@@ -2,22 +2,12 @@
 
 @section('content')
 
+
     <div class="row">
+        
         <div class="col-lg-4 offset-lg-4">
             <h3>Add new asset</h3>
             <a href="/assets" class="btn btn-info">Back to Asset lists</a>
-            <form action="/categories" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label for="name">Asset Type</label>
-                    <input name="name" type="text" class="form-control">
-                </div>
-                <button class="form-control btn btn-success" type="submit">Submit</button>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-4 offset-lg-4">
             <form action="/assets" method="POST">
                 @csrf                
                 <div class="form-group">

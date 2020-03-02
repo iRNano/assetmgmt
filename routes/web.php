@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('/register', 'RegisterController@showCustomRegForm');
 Auth::routes();
 Route::get('/', function(){
     return view('welcome');
@@ -22,4 +23,5 @@ Route::get('/dashboard', function () {
 Route::resource('assets', 'AssetController');
 Route::resource('assetDetails','AssetDetailController');
 Route::resource('categories', 'CategoryController');
+Route::resource('transactions', 'TransactionController');
 

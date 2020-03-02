@@ -20,9 +20,18 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->unsignedBigInteger('department_id');
             $table->rememberToken();
             $table->timestamps();
-            $table->boolean('isAdmin')->default(false);            
+            $table->boolean('isAdmin')->default(false); 
+            
+            //define foreign key
+
+            $table->foreign('department_id')
+            ->references('id')
+            ->on('departments')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
         });
     }
 

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Transaction;
+use App\User;
+use App\Asset;
+use App\AssetDetail;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -14,7 +17,9 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        $transactions = Transaction::all();
+
+        return view('transactions.index');
     }
 
     /**
@@ -24,7 +29,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        return view('transactions.create');
     }
 
     /**

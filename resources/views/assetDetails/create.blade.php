@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <input type="hidden" name="assetID" value="{{$assetID}}">
-                <button type="submit">Add</button>
+                <button type="submit" class="form-control btn btn-success">Add</button>
             </form>
 		</div>
 	</div>
