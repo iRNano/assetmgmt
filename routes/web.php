@@ -24,4 +24,6 @@ Route::resource('assets', 'AssetController');
 Route::resource('assetDetails','AssetDetailController');
 Route::resource('categories', 'CategoryController');
 Route::resource('transactions', 'TransactionController');
+// Route::post('/cart', 'CartController@store');
+Route::resource('cart', 'CartController');
 

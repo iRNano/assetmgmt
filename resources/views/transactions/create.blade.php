@@ -2,31 +2,82 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-6 offset-lg-3">
-            <h1>Create Transaction</h1>
-
-            <form action="/transactions" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label for="trans_no">Transaction Number</label>
-                    <input type="text" name="trans_no" class="form-control">
-                </div>
-                <div class="form-group">
+        <div class="col-lg-6 offset-lg-3 text-center">
+            <h1>Request View</h1>
+            <a href="/transactions/create" class="btn btn-info">ALL</a>
+            @foreach(App\Category::all() as $category)
+                <a href="/categories/{{$category->id}}" class="btn btn-info">{{$category->name}}</a>
+            @endforeach
+ {{--                <div class="form-group">
                     <label for="trans_type">Transaction Type</label>
                     <select name="trans_type" class="form-control">
                         <option value="1">Request</option>
                         <option value="2">Return</option>
                     </select>
+                </div> --}}
+  {{--               <div class="form-group">
+                    <label for="trans_no">Asset Type</label>
+                    <select name="categories" class="form-control" onchange="this.form.submit()">
+                        @foreach(App\Category::all() as $category)
+                            <option value="{{$category->id}}"><a href="/categories/{{$category->id}}">{{$category->name}}</a></option>
+                        @endforeach
+                    </select>
+                </div> --}}
+                <table class="table table-striped">
+                    <thead>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Available Units</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                        @foreach($assets as $asset)
+                            <tr>
+                                <td>{{$asset->brand}}</td>
+                                <td>{{$asset->model}}</td>
+                                <td>
+                                    {{DB::table('asset_details')->where('asset_id', $asset->id)->count()}}
+                                </td>
+                                <td>
+
+                                    {{-- Request this item --}}
+                                    <form action="/cart/" method="POST">
+                                        @csrf
+                                        @method('POST')
+                                        <input type="number" max="{{DB::table('asset_details')->where('asset_id', $asset->id)->count()}}" min="0" name="quantity">
+                                        <input type="hidden" name="category" value="{{$asset->category}}">
+                                        <input type="hidden" name="brand" value="{{$asset->brand}}">
+                                        <input type="hidden" name="model" value="{{$asset->model}}">
+                                        <button type="submit" formmethod="post"class="btn btn-success">Request</button>
+                                    </form>
+
+                                    {{-- Trigger modal --}}
+                           {{--          <button class="btn btn-success" type="button" data-toggle="modal" data-target="#exampleModal">Request</button> --}}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                {{-- Modal --}}
+{{--             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Request</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    ...
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
                 </div>
-                <div class="form-group">
-                    <label for="trans_no">Transaction Number</label>
-                    <input type="text" name="trans_no" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="trans_no">Transaction Number</label>
-                    <input type="text" name="trans_no" class="form-control">
-                </div>
-            </form>
+              </div>
+            </div> --}}
         </div>
     </div>
 @endsection

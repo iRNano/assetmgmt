@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTransactionsTable extends Migration
+class CreateAssetsTransactions extends Migration
 {
     /**
      * Run the migrations.
@@ -13,25 +13,22 @@ class CreateTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('assets_transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('transNo')->unique();
-            $table->unsignedBigInteger('profile_id');
-            $table->unsignedBigInteger('status_id'); //Transaction status ID
-            $table->integer('total');
+            $table->unsignedBigInteger('asset_details_id');
+            $table->unsignedBigInteger('transaction_id');
+            $table->integer('quantity');
             $table->timestamps();
 
-            //define foreign key
-            $table->foreign('profile_id')
+            $table->foreign('asset_details_id')
             ->references('id')
-            ->on('profiles')
+            ->on('asset_details')
             ->onDelete('restrict')
             ->onUpdate('cascade');
 
-            $table->foreign('status_id')
+            $table->foreign('transaction_id')
             ->references('id')
-            ->on('transaction_statuses')
+            ->on('transactions')
             ->onDelete('restrict')
             ->onUpdate('cascade');
         });
@@ -44,6 +41,6 @@ class CreateTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('assets_transactions');
     }
 }

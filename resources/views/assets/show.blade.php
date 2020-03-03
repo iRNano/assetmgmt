@@ -16,12 +16,25 @@
                 <thead>
                     <th>Serial Number</th>
                     <th>Status</th>
+                    <th>Action</th>
                 </thead>
                 <tbody>
                     @foreach($assetDetails as $assetDetail)
                         <tr>
                             <td>{{$assetDetail->serial_number}}</td>
                             <td>{{$assetDetail->status->name}}</td>
+                            <td>
+                                <div class="form-group">
+                                    <a href="/assetDetails/{{$assetDetail->id}}/edit" class="btn btn-warning" class="form-control">Edit</a>
+                                </div>
+                                    <form action="/assets/{{$asset->id}}" method="POST" class="form-group">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit" class="form-control btn btn-danger">Delete</button>
+                                    </form>
+                                
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -38,3 +38,14 @@ ex. if($product->trashed())
 To restore data:
 use the restore method
 Product::withTrashed()->find('id', $id)->restore();
+
+---- add different fields to reg form
+1. Create a new migration file "add_username_to_users"
+	php artisan make:migration "add_username_to_users" --table=users
+	 Add below line to up and down method of migration file
+	 table->string('username')
+	 table->dropColumn('username')
+2. Modify the registration page to include the username in the form
+3. Modify the RegisterController to handle the new username
+
+--Change login email to username

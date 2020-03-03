@@ -128,9 +128,9 @@ class AssetController extends Controller
      */
     public function destroy(Asset $asset)
     {
-        $asset->isActive = 0;
-        $asset->save();
+        // $asset->isActive = 0;
+        // $asset->save();
         
-        return redirect('/assets');
+        return redirect('/assets/1');
     }
 }

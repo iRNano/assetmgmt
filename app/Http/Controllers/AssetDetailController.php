@@ -25,8 +25,8 @@ class AssetDetailController extends Controller
 
     }
 
-    public function destroy(){
-
+    public function destroy($id){
+        return redirect('assets/$id');
     }
 
     public function store(Request $request){
@@ -43,7 +43,11 @@ class AssetDetailController extends Controller
     	return redirect("assets/$request->assetID");
     }
 
-    public function edit(){
+    public function edit($id){
 
-    }
+        $assetDetails = AssetDetail::find($id);
+        
+
+        return view('assetDetails.edit', compact('assetDetails'));
+    }  
 }

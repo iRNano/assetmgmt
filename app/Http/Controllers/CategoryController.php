@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use App\Assets;
+use App\AssetDetail;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
+
 
 class CategoryController extends Controller
 {
@@ -12,9 +17,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, Category $category)
     {
-        //
+
     }
 
     /**
@@ -50,7 +55,33 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        
+        $assets = $category->assets;
+        
+        // if(!is_null($assets)){
+        //     foreach($assets as $asset){
+        //     $countArray = Arr::add([ 'asset_id' => 'count'], $asset->id, (DB::table('asset_details')
+        //         ->where('asset_id', $asset->id)->count()));
+        //     }
+        // }else{
+        //     $countArray = [];    
+        // }
+
+        // dd($countArray);
+        
+        
+        
+        // $arrayCount = ["asset_id", 'count'];
+        // $assetCount = DB::table('asset_details')->where('asset_id', $assets[0]->id)->count();
+        // dd($assetCount);
+        // $assetCount = [];
+        // for ($i=0; $i < count($assets); $i++) { 
+        //     $assetCount = Arr::push(DB::table('asset_details')->where('asset_id', $assets->id));
+        // }
+        // dd($assetCount);
+        
+        // $count = DB::table('asset_details')->where('status_id', 1);
+        return view('transactions.create', compact('assets'));
     }
 
     /**

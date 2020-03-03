@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Transaction;
-use App\User;
+use Illuminate\Http\Request;
+use Session;
 use App\Asset;
 use App\AssetDetail;
-use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\DB;
 
-class TransactionController extends Controller
+
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +17,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::all();
-
-        return view('transactions.index');
+        //
     }
 
     /**
@@ -31,15 +27,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        $assets = Asset::all();
-
-        // if(!is_null($assets)){
-        //     foreach($assets as $asset){
-        //     $countArray = Arr::add([ 'asset_id' => 'count'], $asset->id, (DB::table('asset_details')
-        //         ->where('asset_id', $asset->id)->count()));
-        //     }
-        // }
-        return view('transactions.create', compact('assets'));
+        //
     }
 
     /**
@@ -50,16 +38,23 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect('transactions.index');
+        $cart = [];
+        if($request->session()->has('cart')){
+            $cart = $request->session()->get('cart');
+        }
+        $cart[$request->item_id] = $request->quantity;
+        $request->session()->put('cart', $cart);
+        Session::flash('message', $request->quantity. " items added to cart");
+        return redirect('/transactions/create');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Transaction  $transaction
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Transaction $transaction)
+    public function show($id)
     {
         //
     }
@@ -67,10 +62,10 @@ class TransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Transaction  $transaction
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaction $transaction)
+    public function edit($id)
     {
         //
     }
@@ -79,10 +74,10 @@ class TransactionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Transaction  $transaction
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -90,10 +85,10 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Transaction  $transaction
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
+    public function destroy($id)
     {
         //
     }
