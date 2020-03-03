@@ -9,6 +9,8 @@ use App\AssetDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Auth;
+use Session;
 
 class TransactionController extends Controller
 {
@@ -21,7 +23,7 @@ class TransactionController extends Controller
     {
         $transactions = Transaction::all();
 
-        return view('transactions.index');
+        return view('transactions.index', compact('transactions'));
     }
 
     /**
@@ -31,14 +33,9 @@ class TransactionController extends Controller
      */
     public function create()
     {
+
         $assets = Asset::all();
 
-        // if(!is_null($assets)){
-        //     foreach($assets as $asset){
-        //     $countArray = Arr::add([ 'asset_id' => 'count'], $asset->id, (DB::table('asset_details')
-        //         ->where('asset_id', $asset->id)->count()));
-        //     }
-        // }
         return view('transactions.create', compact('assets'));
     }
 
@@ -50,7 +47,25 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect('transactions.index');
+        $transNo = 'RQ'.time();
+        $new_trans = new Transaction;
+        $new_trans->name = Auth::user()->name;
+        $new_trans->user_id = Auth::user()->id;
+        $new_trans->transNo = $transNo;
+        $new_trans->total =0;
+        $new_trans->save();
+
+        $total = 0;
+        foreach(Session::get('cart') as $asset_id => $quantity){
+            $new_trans->assets()->attach($asset_id, ['quantity' => $quantity]);
+
+            $total += $quantity;
+        }
+
+        $new_trans->total =$total;
+        $new_trans->save();
+        Session::forget('cart');
+        return redirect('/transactions');
     }
 
     /**

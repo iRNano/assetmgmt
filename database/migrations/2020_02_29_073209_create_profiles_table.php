@@ -16,7 +16,7 @@ class CreateProfilesTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('department_id');
+            // $table->unsignedBigInteger('department_id');
             $table->timestamps();
 
             //define foreign key for user
@@ -28,11 +28,11 @@ class CreateProfilesTable extends Migration
 
             //define foreign key for department
 
-            $table->foreign('department_id')
-            ->references('id')
-            ->on('departments')
-            ->onDelete('restrict')
-            ->onUpdate('cascade');
+            // $table->foreign('department_id')
+            // ->references('id')
+            // ->on('departments')
+            // ->onDelete('restrict')
+            // ->onUpdate('cascade');
         });
     }
 

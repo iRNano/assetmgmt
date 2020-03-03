@@ -10,6 +10,10 @@ use App\AssetDetail;
 
 class CartController extends Controller
 {
+    public function __construct(){
+
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +21,20 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $details_of_items_in_cart = [];
+        $total = 0;
+        if(!is_null(Session::get('cart')) || Session::exists('cart')){
+            foreach(Session::get('cart') as $asset_id => $quantity){
+                $asset = Asset::find($asset_id);
+                if($asset !== null){
+                    $asset->quantity = $quantity;
+                    $total += $quantity;
+                    array_push($details_of_items_in_cart, $asset);
+                }
+            }
+        }
+
+        return view('transactions.cart', compact('details_of_items_in_cart', 'total'));
     }
 
     /**
@@ -42,8 +59,9 @@ class CartController extends Controller
         if($request->session()->has('cart')){
             $cart = $request->session()->get('cart');
         }
-        $cart[$request->item_id] = $request->quantity;
+        $cart[$request->asset_id] = $request->quantity;
         $request->session()->put('cart', $cart);
+
         Session::flash('message', $request->quantity. " items added to cart");
         return redirect('/transactions/create');
     }
@@ -79,7 +97,11 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cart = Session::get('cart');
+        $cart[$id] = $request->quantity;
+        Session::put("cart", $cart);
+
+        return redirect('/cart');
     }
 
     /**

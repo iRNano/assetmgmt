@@ -4,6 +4,7 @@
         <div class="col-lg-6 offset-lg-3">
             <h1>Assets</h1>
             <a href="/assets/create" class="btn btn-info">Add Asset</a>
+            <a href="/dashboard" class="btn btn-info">Back to Dashboard</a>
 
             
                 <table class="table table-striped">

@@ -4,25 +4,16 @@
     <div class="row">
         <div class="col-lg-6 offset-lg-3 text-center">
             <h1>Request View</h1>
+            <a href="/dashboard" class="btn btn-info">Back to Dashboard</a>
             <a href="/transactions/create" class="btn btn-info">ALL</a>
             @foreach(App\Category::all() as $category)
                 <a href="/categories/{{$category->id}}" class="btn btn-info">{{$category->name}}</a>
             @endforeach
- {{--                <div class="form-group">
-                    <label for="trans_type">Transaction Type</label>
-                    <select name="trans_type" class="form-control">
-                        <option value="1">Request</option>
-                        <option value="2">Return</option>
-                    </select>
-                </div> --}}
-  {{--               <div class="form-group">
-                    <label for="trans_no">Asset Type</label>
-                    <select name="categories" class="form-control" onchange="this.form.submit()">
-                        @foreach(App\Category::all() as $category)
-                            <option value="{{$category->id}}"><a href="/categories/{{$category->id}}">{{$category->name}}</a></option>
-                        @endforeach
-                    </select>
-                </div> --}}
+            <a href="/cart" class="btn btn-warning">Cart</a>
+            @if(Session::has('message'))
+                <h4>{{Session::get('message')}}</h4>
+            @endif
+            {{-- Table --}}
                 <table class="table table-striped">
                     <thead>
                         <th>Brand</th>
@@ -45,6 +36,7 @@
                                         @csrf
                                         @method('POST')
                                         <input type="number" max="{{DB::table('asset_details')->where('asset_id', $asset->id)->count()}}" min="0" name="quantity">
+                                        <input type="hidden" name="asset_id" value="{{$asset->id}}">
                                         <input type="hidden" name="category" value="{{$asset->category}}">
                                         <input type="hidden" name="brand" value="{{$asset->brand}}">
                                         <input type="hidden" name="model" value="{{$asset->model}}">

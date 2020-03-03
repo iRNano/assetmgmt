@@ -17,15 +17,15 @@ class CreateTransactionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('transNo')->unique();
-            $table->unsignedBigInteger('profile_id');
-            $table->unsignedBigInteger('status_id'); //Transaction status ID
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('status_id')->default(1); //Transaction status ID
             $table->integer('total');
             $table->timestamps();
 
             //define foreign key
-            $table->foreign('profile_id')
+            $table->foreign('user_id')
             ->references('id')
-            ->on('profiles')
+            ->on('users')
             ->onDelete('restrict')
             ->onUpdate('cascade');
 

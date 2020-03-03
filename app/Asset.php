@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Asset extends Model
 {
     public function category(){
-        return $this->belongsTo('App\Category');
+        return $this->belongsTo(Category::class);
     }
 
     public function details(){
-    	return $this->hasMany('App\AssetDetail');
+    	return $this->hasMany(AssetDetail::class);
     }
+
+    
 }
