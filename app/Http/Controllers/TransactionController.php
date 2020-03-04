@@ -31,17 +31,11 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Asset $asset)
     {
-        
         $assets = Asset::all();
-        $availableAssets;
-        // foreach($assets as $asset){
-        //     foreach($asset->details as $detail){
-        //         dd($detail->status_id);
-        //     }
-        // }
-        return view('transactions.create', compact('assets'));
+
+        return view('transactions.create', compact('assets', 'stockCalculator'));
     }
 
     /**
@@ -107,17 +101,21 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
-        
-        //update status of asset details (stock)
-        foreach($request->details as $detail){
-            $assetDetail = AssetDetail::find($detail);
-            $assetDetail->status_id = 2; //set asset status to deployed
-            $assetDetail->save();
+        if(is_null($request->reject)){ 
+            //update status of asset details (stock)
+            foreach($request->details as $detail){
+                $assetDetail = AssetDetail::find($detail);
+                $assetDetail->status_id = 2; //set asset status to deployed
+                $assetDetail->user_id = auth()->user()->id;
+                $assetDetail->save();
+            }
+            //update status of transaction (complete or reject)
+            $transaction->status_id = 2; // set status to completed;
+
+        }else{
+            $transaction->status_id = 3; // set to Rejected
         }
 
-        
-        //update status of transaction (complete or reject)
-        $transaction->status_id = 2; // set status to completed;
         $transaction->save();
         return redirect('/transactions');
     }
@@ -133,8 +131,10 @@ class TransactionController extends Controller
         //
     }
 
-    public function assign($id)
+    public function reject($id)
     {
+        dd($id);
 
+        return redirect('/transactions');
     }
 }

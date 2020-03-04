@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Asset;
 use App\AssetDetail;
 use Illuminate\Http\Request;
+use DB;
+use App\Transaction;
+use Auth;
+
 
 class AssetController extends Controller
 {
@@ -18,10 +22,15 @@ class AssetController extends Controller
 
         $this->middleware('auth');
     }
-    public function index(Request $request)
+    public function index(Request $request, Asset $assets)
     {   
         //Show all active assets
         $assets = Asset::where('isActive', true)->get();
+        
+        // $stockCalculator = DB::table('asset_details')->where([
+        //     ['asset_id', '=',$asset->id], 
+        //     ['status_id','=', 1]])->count();
+
         return view('assets.index', compact('assets'));
     }
 
@@ -137,5 +146,22 @@ class AssetController extends Controller
         // $asset->save();
         
         return redirect('/assets/1');
+    }
+
+    public function myassets()
+    {
+        // $assets = Asset::all();
+
+        // load('transactions.assets');
+        $transactions = Transaction::has('user', '=', auth()->user()->id)->get();
+        // foreach($transactions as $transaction){
+        //     foreach($transaction->assets as $asset){
+        //         dd($asset->details);
+        //     }
+        // }
+        
+        
+
+        return view('assets.myassets', compact('transactions'));
     }
 }

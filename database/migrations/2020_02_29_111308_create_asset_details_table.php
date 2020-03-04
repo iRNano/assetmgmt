@@ -16,6 +16,7 @@ class CreateAssetDetailsTable extends Migration
         Schema::create('asset_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('asset_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('serial_number')->unique();
             $table->text('specs')->nullable();
             $table->text('os')->nullable();
@@ -37,6 +38,12 @@ class CreateAssetDetailsTable extends Migration
             $table->foreign('asset_id')
             ->references('id')
             ->on('assets')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
+            //
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
             ->onDelete('restrict')
             ->onUpdate('cascade');
 

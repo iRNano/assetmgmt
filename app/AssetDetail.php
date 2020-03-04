@@ -14,7 +14,7 @@ class AssetDetail extends Model
     	return $this->belongsTo(AssetStatus::class);
     }
 
-    // public function transactions(){
-    //     return $this->belongsToMany(Transaction::class, 'assets_transactions')->withPivot('quantity')->withTimestamps();
-    // }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

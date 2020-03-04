@@ -7,6 +7,7 @@
             <a href="/assets" class="btn btn-info">Assets</a>
             <a href="/transactions" class="btn btn-info">Transactions</a>
             <a href="/transactions/create" class="btn btn-info">Requests</a>
+            <a href="/myassets" class="btn btn-info">My Assets</a>
         </div>
     </div>
 @endsection

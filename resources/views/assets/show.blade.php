@@ -16,6 +16,8 @@
                 <thead>
                     <th>Serial Number</th>
                     <th>Status</th>
+                    <th>Accountability</th>
+                    <th>Location</th>
                     <th>Action</th>
                 </thead>
                 <tbody>
@@ -23,6 +25,10 @@
                         <tr>
                             <td>{{$assetDetail->serial_number}}</td>
                             <td>{{$assetDetail->status->name}}</td>
+                            
+                            <td>{{is_null($assetDetail->user) ? ' ' : $assetDetail->user->name}}</td>
+                            <td>{{is_null($assetDetail->user) ? ' ' : $assetDetail->user->department->name}}</td>
+                             
                             <td>
                                 <div class="form-group">
                                     <a href="/assetDetails/{{$assetDetail->id}}/edit" class="btn btn-warning" class="form-control">Edit</a>

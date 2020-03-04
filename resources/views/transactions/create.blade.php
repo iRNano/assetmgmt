@@ -23,37 +23,42 @@
                     </thead>
                     <tbody>
                         @foreach($assets as $asset)
-                            @foreach($asset->details as $detail)
+                            @if(DB::table('asset_details')
+                            ->where([
+                                ['asset_id','=',$asset->id],
+                                ['status_id', '=', 1]
+                            ])->count() > 0)
+                            {{-- @foreach($asset->details as $detail)
                                 {{$detail}}
-                            @endforeach
-                            <tr>
-                                <td>{{$asset->brand}}</td>
-                                <td>{{$asset->model}}</td>
-                                <td>
-                                    
-                                    {{DB::table('asset_details')->where([
-                                    ['asset_id', '=',$asset->id], 
-                                    ['status_id','=', 1]])->count()}}
-                                </td>
-                                <td>
+                            @endforeach --}}
+                                <tr>
+                                    <td>{{$asset->brand}}</td>
+                                    <td>{{$asset->model}}</td>
+                                    <td>
+                                        
+                                        {{DB::table('asset_details')->where([
+                                        ['asset_id', '=',$asset->id], 
+                                        ['status_id','=', 1]])->count()}}
+                                    </td>
+                                    <td>
 
-                                    {{-- Request this item --}}
-                                    <form action="/cart/" method="POST">
-                                        @csrf
-                                        @method('POST')
-                                        <input type="number" max="{{DB::table('asset_details')->where('asset_id', $asset->id)->count()}}" min="0" name="quantity">
-                                        <input type="hidden" name="asset_id" value="{{$asset->id}}">
-                                        <input type="hidden" name="category" value="{{$asset->category}}">
-                                        <input type="hidden" name="brand" value="{{$asset->brand}}">
-                                        <input type="hidden" name="model" value="{{$asset->model}}">
-                                        <button type="submit" formmethod="post"class="btn btn-success">Request</button>
-                                    </form>
+                                        {{-- Request this item --}}
+                                        <form action="/cart/" method="POST">
+                                            @csrf
+                                            @method('POST')
+                                            <input type="number" max="{{DB::table('asset_details')->where([['asset_id','=', $asset->id], ['status_id','=',1]])->count()}}" min="0" name="quantity">
+                                            <input type="hidden" name="asset_id" value="{{$asset->id}}">
+                                            <input type="hidden" name="category" value="{{$asset->category}}">
+                                            <input type="hidden" name="brand" value="{{$asset->brand}}">
+                                            <input type="hidden" name="model" value="{{$asset->model}}">
+                                            <button type="submit" formmethod="post"class="btn btn-success">Request</button>
+                                        </form>
 
-                                    {{-- Trigger modal --}}
-                           {{--          <button class="btn btn-success" type="button" data-toggle="modal" data-target="#exampleModal">Request</button> --}}
-                                </td>
-                            </tr>
-                            
+                                        {{-- Trigger modal --}}
+                            {{--          <button class="btn btn-success" type="button" data-toggle="modal" data-target="#exampleModal">Request</button> --}}
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>

@@ -54,4 +54,12 @@ class User extends Authenticatable
     public function department(){
         return $this->belongsTo(Department::class);
     }
+
+    public function transactions(){
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function details(){
+        return $this->hasMany(AssetDetail::class);
+    }
 }

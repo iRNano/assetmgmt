@@ -36,8 +36,9 @@
 							Item {{$i+1}}
 							<select name=details[] class="form-control">
 								@foreach($asset->details as $detail)
-									@if($detail->status_id = 1)
-									<option value="{{$detail->id}}">{{$detail->serial_number}}</option>
+									@if($detail->status_id == 1)
+										
+										<option value="{{$detail->id}}">{{$detail->serial_number}}</option>
 									@endif
 								@endforeach
 

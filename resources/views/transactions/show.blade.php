@@ -30,15 +30,19 @@
 
 			</tbody>
 		</table>
-
-		
-			<a href="#" class="btn btn-danger">Reject</a>
+		@if($transaction->status_id == 1)
+			<form action="/transactions/{{$transaction->id}}" method="POST">
+				@csrf
+				@method('PUT')
+				<input type="hidden" name="reject" value="{{$transaction->id}}">
+				<button type="Submit" class="btn btn-danger">Reject</button>
+			</form>		
 			<form action="/transactions/{{$transaction->id}}/edit" method="GET">
 				@csrf
 				
 				<button type="Submit" class="btn btn-success">Assign Items</button>
 			</form>		
-		
+		@endif
 	</div>
 </div>
 @endsection
