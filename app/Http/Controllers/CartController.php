@@ -55,13 +55,14 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+
         $cart = [];
         if($request->session()->has('cart')){
             $cart = $request->session()->get('cart');
         }
         $cart[$request->asset_id] = $request->quantity;
         $request->session()->put('cart', $cart);
-
+        
         Session::flash('message', $request->quantity. " items added to cart");
         return redirect('/transactions/create');
     }

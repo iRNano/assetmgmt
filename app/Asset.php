@@ -14,5 +14,12 @@ class Asset extends Model
     	return $this->hasMany(AssetDetail::class);
     }
 
+    public function asssetTransaction(){
+    	return $this->hasManyThrough(AssetDetail::class, Transaction::class);
+    }
+
+    public function transactions(){
+        return $this->belongsToMany(Transaction::class, 'assets_transactions')->withPivot('quantity')->withTimestamps();
+    }
     
 }

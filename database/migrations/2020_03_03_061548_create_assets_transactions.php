@@ -15,14 +15,14 @@ class CreateAssetsTransactions extends Migration
     {
         Schema::create('assets_transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('asset_detail_id');
+            $table->unsignedBigInteger('asset_id');
             $table->unsignedBigInteger('transaction_id');
             $table->integer('quantity');
             $table->timestamps();
 
-            $table->foreign('asset_detail_id')
-            ->references('asset_id')
-            ->on('asset_details')
+            $table->foreign('asset_id')
+            ->references('id')
+            ->on('assets')
             ->onDelete('restrict')
             ->onUpdate('cascade');
 

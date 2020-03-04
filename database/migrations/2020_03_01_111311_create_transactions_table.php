@@ -17,6 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('transNo')->unique();
+            $table->unsignedBigInteger('type_id')->default(1); //Transaction Type - Request
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('status_id')->default(1); //Transaction status ID
             $table->integer('total');
@@ -32,6 +33,12 @@ class CreateTransactionsTable extends Migration
             $table->foreign('status_id')
             ->references('id')
             ->on('transaction_statuses')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
+
+            $table->foreign('type_id')
+            ->references('id')
+            ->on('transaction_types')
             ->onDelete('restrict')
             ->onUpdate('cascade');
         });

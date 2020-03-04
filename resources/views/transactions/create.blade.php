@@ -23,11 +23,17 @@
                     </thead>
                     <tbody>
                         @foreach($assets as $asset)
+                            @foreach($asset->details as $detail)
+                                {{$detail}}
+                            @endforeach
                             <tr>
                                 <td>{{$asset->brand}}</td>
                                 <td>{{$asset->model}}</td>
                                 <td>
-                                    {{DB::table('asset_details')->where('asset_id', $asset->id)->count()}}
+                                    
+                                    {{DB::table('asset_details')->where([
+                                    ['asset_id', '=',$asset->id], 
+                                    ['status_id','=', 1]])->count()}}
                                 </td>
                                 <td>
 
@@ -47,6 +53,7 @@
                            {{--          <button class="btn btn-success" type="button" data-toggle="modal" data-target="#exampleModal">Request</button> --}}
                                 </td>
                             </tr>
+                            
                         @endforeach
                     </tbody>
                 </table>

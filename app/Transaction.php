@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     public function assets(){
-        return $this->belongsToMany(AssetDetail::class, 'assets_transactions')->withPivot('quantity')->withTimestamps();
+        return $this->belongsToMany(Asset::class, 'assets_transactions')->withPivot('quantity')->withTimestamps();
     }
 
     public function status(){
@@ -16,5 +16,9 @@ class Transaction extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function type(){
+    	return $this->belongsTo(TransactionType::class);
     }
 }

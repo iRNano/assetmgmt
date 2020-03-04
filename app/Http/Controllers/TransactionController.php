@@ -33,9 +33,14 @@ class TransactionController extends Controller
      */
     public function create()
     {
-
+        
         $assets = Asset::all();
-
+        $availableAssets;
+        // foreach($assets as $asset){
+        //     foreach($asset->details as $detail){
+        //         dd($detail->status_id);
+        //     }
+        // }
         return view('transactions.create', compact('assets'));
     }
 
@@ -47,6 +52,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+
         $transNo = 'RQ'.time();
         $new_trans = new Transaction;
         $new_trans->name = Auth::user()->name;
@@ -57,8 +63,9 @@ class TransactionController extends Controller
 
         $total = 0;
         foreach(Session::get('cart') as $asset_id => $quantity){
+            
             $new_trans->assets()->attach($asset_id, ['quantity' => $quantity]);
-
+            
             $total += $quantity;
         }
 
@@ -76,7 +83,8 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        //
+        
+        return view('transactions.show', compact('transaction'));
     }
 
     /**
@@ -87,7 +95,7 @@ class TransactionController extends Controller
      */
     public function edit(Transaction $transaction)
     {
-        //
+        return view('transactions.edit', compact('transaction'));
     }
 
     /**
@@ -99,7 +107,19 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
-        //
+        
+        //update status of asset details (stock)
+        foreach($request->details as $detail){
+            $assetDetail = AssetDetail::find($detail);
+            $assetDetail->status_id = 2; //set asset status to deployed
+            $assetDetail->save();
+        }
+
+        
+        //update status of transaction (complete or reject)
+        $transaction->status_id = 2; // set status to completed;
+        $transaction->save();
+        return redirect('/transactions');
     }
 
     /**
@@ -111,5 +131,10 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         //
+    }
+
+    public function assign($id)
+    {
+
     }
 }

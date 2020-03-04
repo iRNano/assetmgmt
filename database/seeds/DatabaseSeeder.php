@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             CategoriesTableSeeder::class,
             AssetsTableSeeder::class,
             AssetDetailsTableSeeder::class,
-            TransactionStatusesTableSeeder::class
+            TransactionStatusesTableSeeder::class,
+            TransactionTypesTableSeeder::class
             ]
         );
     }

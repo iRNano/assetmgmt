@@ -13,6 +13,7 @@
                         <th>Asset Type</th>
                         <th>Asset Brand</th>
                         <th>Asset Model</th>
+                        <th>Available Stocks</th>
                         <th>Action</th>
                     </thead>
                     <tbody>
@@ -21,6 +22,9 @@
                                 <td>{{$asset->category->name}}</td>
                                 <td>{{$asset->brand}}</td>
                                 <td>{{$asset->model}}</td>
+                                <td>{{DB::table('asset_details')->where([
+                                    ['asset_id', '=',$asset->id], 
+                                    ['status_id','=', 1]])->count()}}</td>
                                 <td>
                                     <a href="/assets/{{$asset->id}}" class="btn btn-info">Details</a>
                                 </td>

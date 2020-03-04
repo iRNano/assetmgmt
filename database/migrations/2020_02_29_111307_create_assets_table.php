@@ -15,7 +15,6 @@ class CreateAssetsTable extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->bigIncrements('id');
-            // $table->string('name');
             $table->unsignedBigInteger('category_id');
             $table->string('brand');
             $table->string('model')->unique();

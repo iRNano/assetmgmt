@@ -23,6 +23,7 @@ Route::get('/dashboard', function () {
 Route::resource('assets', 'AssetController');
 Route::resource('assetDetails','AssetDetailController');
 Route::resource('categories', 'CategoryController');
+// Route::get('transactions/assign', 'TransactionController@assign');
 Route::resource('transactions', 'TransactionController');
 // Route::post('/cart', 'CartController@store');
 Route::resource('cart', 'CartController');
