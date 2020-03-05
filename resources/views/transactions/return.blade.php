@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row">
-	<div class="col-lg-6 offset-lg-3">
+	<div class="col-lg-8 offset-lg-2">
 		<h1 class="text-center">Return Assets</h1>
 		<a href="/dashboard" class="btn btn-info">Back to Dashboard</a>
 

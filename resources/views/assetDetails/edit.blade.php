@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('content')
 	<div class="row">
+        
 		<div class="col-lg-6 offset-lg-3">
+            <h1 class="text-center">Modify Asset</h1>
             <form action="/assetDetails" method="POST">
                 @csrf
 

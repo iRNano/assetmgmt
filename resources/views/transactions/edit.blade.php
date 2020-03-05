@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="row">
-		<div class="col-lg-6 offset-lg-3 border border-solid">
+		<div class="col-lg-8 offset-lg-2 border border-solid">
 			<h1 class="text-center">Assign Items</h1>
 
 			<form action="/transactions/{{$transaction->id}}" method="POST">
@@ -40,10 +40,11 @@
 										
 										<option value="{{$detail->id}}">{{$detail->serial_number}}</option>
 									@endif
-								@endforeach
-
+								@endforeach								
 							</select>
+							<p style="color:red;">@error("details.$i") {{$message}} @enderror</p>					
 						@endfor
+							
 						
 					@endforeach
 					</div>
@@ -51,6 +52,7 @@
 				</div>
 
 				<button type="submit" class="btn btn-success form-control">Submit</button><a href="/transactions/{{$transaction->id}}" class="btn btn-danger form-control">Cancel</a>
+				
 			</form>
 		</div>
 	</div>

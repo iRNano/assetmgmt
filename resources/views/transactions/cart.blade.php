@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-6 offset-lg-3 text-center">
+        <div class="col-lg-8 offset-lg-2 text-center">
             <h1>My Cart</h1>
             <a href="/transactions/create" class="btn btn-info">Add item</a>
             <a href="/dashboard" class="btn btn-info">Back to Dashboard</a>

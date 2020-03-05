@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-6 offset-lg-3">
+        <div class="col-lg-8 offset-lg-2">
             <h1>My Assets</h1> <a href="/dashboard" class="btn btn-info">Back to dashboard</a>
             <a href="cart/return/confirm" class="btn btn-info">Returns</a>
             @if(Session::has('message'))

@@ -66,6 +66,7 @@ class CategoryController extends Controller
     public function filterCategory($id)
     {
         $category = Category::find($id);
+        dd($category);
         $assets = $category->assets;
         return view ('assets.index', compact('assets'));
     }

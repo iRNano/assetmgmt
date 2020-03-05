@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use Session;
 use App\TransactionStatus;
+use App\TransactionType;
 
 class TransactionController extends Controller
 {
@@ -20,6 +21,11 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(){
+
+        $this->middleware('auth');
+    }
     public function index()
     {
         $transactions = Transaction::all();
@@ -101,6 +107,10 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
+            $data = request()->validate(
+                ['details' => "required|array|distinct",
+                'details.*' => "required|distinct"]
+            );        
         //Transaction done during assignment of unit
         if(is_null($request->reject)){ 
             //update status of asset details (stock)
@@ -189,11 +199,21 @@ class TransactionController extends Controller
         return redirect('/myassets');
     }
 
-    public function filter($id){
+    public function filter($id)
+    
+    {
 
-        // $status = TransactionStatus::find($id);
-        // $transactions = $status->transactions;
-        
-        // return view('transactions.index', compact('transactions'));
+        $status = TransactionStatus::where('id',$id)->first();
+        $transactions = $status->transactions;
+        dd($transactions);
+        return view('transactions.index', compact('transactions'));
+    }
+
+    public function type($id)
+    {
+        $type = TransactionType::query()->where('id',$id)->first();
+        $transactions = $type->transactions;
+
+        dd($transactions);
     }
 }

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-6 offset-lg-3">
+        <div class="col-lg-8 offset-lg-2">
             <h1>{{$asset->category->name}}</h1>
             {{$asset->brand}} {{$asset->model}}
             <a href="/assets" class="btn btn-info">Back to Assets</a>
@@ -31,13 +31,13 @@
                              
                             <td>
                                 <div class="form-group">
-                                    <a href="/assetDetails/{{$assetDetail->id}}/edit" class="btn btn-warning" class="form-control">Edit</a>
+                                    <a href="/assetDetails/{{$assetDetail->id}}/edit" class="btn btn-warning" class="form-control"><i class="fas fa-pencil-alt"></i></a>
                                 </div>
                                     <form action="/assets/{{$asset->id}}" method="POST" class="form-group">
                                         @csrf
                                         @method('DELETE')
-
-                                        <button type="submit" class="form-control btn btn-danger">Delete</button>
+                                        <input type="hidden" name="asset_detail_id" value="{{$assetDetail->id}}">
+                                        <button type="submit" class="form-control btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                     </form>
                                 
                             </td>

@@ -4,7 +4,7 @@
 
 
     <div class="row">
-        
+        <h1 class="text-center">Add Stock</h1>
         <div class="col-lg-4 offset-lg-4">
             <h3>Add new asset</h3>
             <a href="/assets" class="btn btn-info">Back to Asset lists</a>

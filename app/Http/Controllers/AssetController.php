@@ -140,10 +140,14 @@ class AssetController extends Controller
      * @param  \App\Asset  $asset
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Asset $asset)
+    public function destroy($id)
     {
-        // $asset->isActive = 0;
-        // $asset->save();
+        $assetDetail = AssetDetail::find($id);
+        if($assetDetail->status_id == 1){
+            $assetDetail->status_id == 3; //Set to 'Scrapped'
+        }else{
+            //cannot be deleted 
+        }
         
         return redirect('/assets/1');
     }

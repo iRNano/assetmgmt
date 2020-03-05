@@ -6,6 +6,7 @@
     </div>
 </div>
 <div class="row">
+    <h1 class="text-center">Modify Asset</h1>
     <div class="col-lg-4 offset-lg-4">
         <form action="/assets/{{$asset->id}}" method="POST">
             @csrf

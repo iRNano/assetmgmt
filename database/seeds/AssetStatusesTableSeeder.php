@@ -14,7 +14,9 @@ class AssetStatusesTableSeeder extends Seeder
     {
         DB::table('asset_statuses')->insert([
         	['name' => 'Available'],
-      		['name' => 'Deployed']
+              ['name' => 'Deployed'],
+              ['name' => 'Scrapped'],
+              ['name' => 'Sold']
         ]);
     }
 }

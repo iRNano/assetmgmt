@@ -7,7 +7,10 @@
         <a href="/dashboard" class="btn btn-info">Back to Dashboard</a>
         @foreach(App\TransactionStatus::all() as $category)
                 <a href="/transactionFilter/{{$category->id}}" class="btn btn-info">{{$category->name}}</a>
-            @endforeach
+        @endforeach
+        @foreach(App\TransactionType::all() as $type)
+                <a href="/transactionType/{{$type->id}}" class="btn btn-info">{{$type->name}}</a>
+        @endforeach
         <table class="table table-striped">
             <thead>
                 <th>Transaction Number</th>

@@ -12,6 +12,11 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(){
+
+        $this->middleware('auth');
+    }
     public function index()
     {
         //
@@ -44,9 +49,11 @@ class ProfileController extends Controller
      * @param  \App\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function show(Profile $profile)
+    public function show($id)
     {
-        //
+        $profile = Profile::find($id);
+        $profile = $profile->user;
+        return view('profile.show', compact('profile'));
     }
 
     /**
