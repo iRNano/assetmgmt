@@ -11,22 +11,25 @@
 |
 */
 // Route::get('/register', 'RegisterController@showCustomRegForm');
-Auth::routes();
+
 Route::get('/', function(){
     return view('welcome');
 });
 Route::get('/dashboard', function () {
     return view('dashboard.index');
 });
-// Route::put('/transactions/{$id}/reject/', 'TransactionController@reject');
-// Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/myassets', 'AssetController@myassets');
+Route::get('/assets/search', 'AssetController@search');
+Route::get("/filterCategory/{id}", 'CategoryController@filterCategory');
+Route::get('/cart/return/confirm', 'CartController@showReturns');
+Route::post('/cart/return', 'CartController@return');
+Route::get("/transactionFilter/{id}", 'TransactionController@filter');
+Route::post('/transactions/return', 'TransactionController@returnTransaction');
+Route::put('/transactions/approveReturn', 'TransactionController@approveReturn');
 Route::resource('assets', 'AssetController');
 Route::resource('assetDetails','AssetDetailController');
 Route::resource('categories', 'CategoryController');
-// Route::get('transactions/assign', 'TransactionController@assign');
-
 Route::resource('transactions', 'TransactionController');
-// Route::post('/cart', 'CartController@store');
 Route::resource('cart', 'CartController');
 
+Auth::routes();

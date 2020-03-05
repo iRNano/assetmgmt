@@ -11,6 +11,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use Session;
+use App\TransactionStatus;
 
 class TransactionController extends Controller
 {
@@ -35,7 +36,7 @@ class TransactionController extends Controller
     {
         $assets = Asset::all();
 
-        return view('transactions.create', compact('assets', 'stockCalculator'));
+        return view('transactions.create', compact('assets'));
     }
 
     /**
@@ -66,7 +67,7 @@ class TransactionController extends Controller
         $new_trans->total =$total;
         $new_trans->save();
         Session::forget('cart');
-        return redirect('/transactions');
+        return redirect('/transactions/create');
     }
 
     /**
@@ -77,7 +78,6 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        
         return view('transactions.show', compact('transaction'));
     }
 
@@ -101,12 +101,13 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
+        //Transaction done during assignment of unit
         if(is_null($request->reject)){ 
             //update status of asset details (stock)
-            foreach($request->details as $detail){
+            foreach($request->details as $detail){           
                 $assetDetail = AssetDetail::find($detail);
                 $assetDetail->status_id = 2; //set asset status to deployed
-                $assetDetail->user_id = auth()->user()->id;
+                $assetDetail->user_id = $transaction->user_id; // set user id to requestor ID
                 $assetDetail->save();
             }
             //update status of transaction (complete or reject)
@@ -136,5 +137,63 @@ class TransactionController extends Controller
         dd($id);
 
         return redirect('/transactions');
+    }
+
+    public function returnTransaction(Request $request, Transaction $transaction)
+    {
+        
+        $transNo = 'RN'.time();
+        $new_trans = new Transaction;
+        $new_trans->name = Auth::user()->name; //returnee's name
+        $new_trans->user_id = Auth::user()->id; //returnee's ID
+        $new_trans->type_id = 2; // Change  transaction type to Return
+        $new_trans->transNo = $transNo;
+        $new_trans->total =0;
+        $new_trans->save();
+
+        $total = 0;
+        
+        foreach(Session::get('returns') as $asset_detail_id => $quantity){
+            $assetDetails = AssetDetail::where('id', $asset_detail_id)->get();
+            foreach($assetDetails as $assetDetail){
+                $asset_id = $assetDetail->asset_id;
+                $new_trans->assets()->attach($asset_id, ['quantity' => $quantity, 'serial_number'=> $assetDetail->serial_number]);
+            }            
+            $total += $quantity;
+        
+        }
+
+        $new_trans->total =$total;
+        $new_trans->save();
+        Session::forget('returns');
+        return redirect('/myassets');
+    }
+
+    public function approveReturn(Request $request, Transaction $transaction)
+    {
+        if(is_null($request->reject)){ 
+            
+            $transaction = Transaction::find($request->transaction_id);
+            foreach($transaction->assets as $asset){
+                $assetDetail = AssetDetail::where('serial_number', $asset->pivot->serial_number)->first();
+                $assetDetail->status_id = 1; //set asset status to available
+                $assetDetail->user_id = null; // set user id to null
+                $assetDetail->save();
+            }
+            $transaction->status_id = 2; // set status to completed;
+        }else{
+            $transaction->status_id = 3; // set to Rejected
+        }
+
+        $transaction->save();
+        return redirect('/myassets');
+    }
+
+    public function filter($id){
+
+        // $status = TransactionStatus::find($id);
+        // $transactions = $status->transactions;
+        
+        // return view('transactions.index', compact('transactions'));
     }
 }

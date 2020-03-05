@@ -115,4 +115,37 @@ class CartController extends Controller
     {
         //
     }
+
+    public function showReturns()
+    {
+        
+        $details_of_items_in_cart = [];
+        $total = 0;
+        if(!is_null(Session::get('returns')) || Session::exists('returns')){
+            foreach(Session::get('returns') as $asset_detail_id => $quantity){
+                $assetDetails = AssetDetail::find($asset_detail_id);
+                
+                if($assetDetails !== null){
+                    $assetDetails->quantity = $quantity;
+                    $total += $quantity;
+                    array_push($details_of_items_in_cart, $assetDetails);
+                }
+            }
+        }
+        
+        return view('transactions.return', compact('details_of_items_in_cart', 'total'));
+    }
+    public function return(Request $request)
+    {
+        
+        $returns = [];
+        if($request->session()->has('returns')){
+            $returns = $request->session()->get('returns');
+        }
+        $returns[$request->asset_detail_id] = $request->quantity;
+        $request->session()->put('returns', $returns);
+        
+        Session::flash('message', $request->quantity. " items added to return");
+        return redirect('/myassets');
+    }
 }

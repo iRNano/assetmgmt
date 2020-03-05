@@ -27,24 +27,26 @@
                     <label for="warranty_date">Warranty End-Date</label>
                     <input type="date" class="form-control" name="warranty_date" value="{{$assetDetails->warranty_date}}">
                 </div>
-                <div class="software-view border border-danger">
-                    <h4>Software -> to be hidden</h4>
-                    <div class="form-group">
-                        <label for="platform">Platform</label>
-                        <input type="text" class="form-control" name="platform" value="{{$assetDetails->platform}}">
+                @if($assetDetails->asset->category->id == 4)
+                    <div class="software-view border border-danger">
+                        <h4>Software -> to be hidden</h4>
+                        <div class="form-group">
+                            <label for="platform">Platform</label>
+                            <input type="text" class="form-control" name="platform" value="{{$assetDetails->platform}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="no_of_users">Number of Users</label>
+                            <input type="text" class="form-control" name="no_of_users" value="{{$assetDetails->no_of_users}}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="license">License Number</label>
+                            <input type="text" class="form-control" name="license" value="{{$assetDetails->license}}">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="no_of_users">Number of Users</label>
-                        <input type="text" class="form-control" name="no_of_users" value="{{$assetDetails->no_of_users}}">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="license">License Number</label>
-                        <input type="text" class="form-control" name="license" value="{{$assetDetails->license}}">
-                    </div>
-                </div>
+                @endif
                 {{-- <input type="hidden" name="assetID" value="{{$assetID}}"> --}}
-                <button type="submit" class="form-control btn btn-success">Add</button>
+                <button type="submit" class="form-control btn btn-success">Modify</button>
             </form>
 		</div>
 	</div>

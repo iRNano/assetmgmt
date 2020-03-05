@@ -58,67 +58,16 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
-    {
-        
+    {       
         $assets = $category->assets;
-        
-        // if(!is_null($assets)){
-        //     foreach($assets as $asset){
-        //     $countArray = Arr::add([ 'asset_id' => 'count'], $asset->id, (DB::table('asset_details')
-        //         ->where('asset_id', $asset->id)->count()));
-        //     }
-        // }else{
-        //     $countArray = [];    
-        // }
-
-        // dd($countArray);
-        
-        
-        
-        // $arrayCount = ["asset_id", 'count'];
-        // $assetCount = DB::table('asset_details')->where('asset_id', $assets[0]->id)->count();
-        // dd($assetCount);
-        // $assetCount = [];
-        // for ($i=0; $i < count($assets); $i++) { 
-        //     $assetCount = Arr::push(DB::table('asset_details')->where('asset_id', $assets->id));
-        // }
-        // dd($assetCount);
-        
-        // $count = DB::table('asset_details')->where('status_id', 1);
         return view('transactions.create', compact('assets'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
+    public function filterCategory($id)
     {
-        //
+        $category = Category::find($id);
+        $assets = $category->assets;
+        return view ('assets.index', compact('assets'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Category $category)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Category $category)
-    {
-        //
-    }
 }

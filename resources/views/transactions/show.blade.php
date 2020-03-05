@@ -35,13 +35,21 @@
 				@csrf
 				@method('PUT')
 				<input type="hidden" name="reject" value="{{$transaction->id}}">
-				<button type="Submit" class="btn btn-danger">Reject</button>
-			</form>		
-			<form action="/transactions/{{$transaction->id}}/edit" method="GET">
+				<button type="submit" class="btn btn-danger">Reject</button>
+			</form>
+			@if($transaction->type_id == 1)		
+				<form action="/transactions/{{$transaction->id}}/edit" method="GET">
+					@csrf				
+					<button type="submit" class="btn btn-success">Assign Items</button>
+				</form>
+			@else
+				<form action="/transactions/approveReturn" method="POST">
 				@csrf
-				
-				<button type="Submit" class="btn btn-success">Assign Items</button>
-			</form>		
+				@method('PUT')
+				<input type="hidden" name="transaction_id" value="{{$transaction->id}}">				
+				<button type="submit" class="btn btn-success">Approve</button>
+			</form>
+			@endif		
 		@endif
 	</div>
 </div>

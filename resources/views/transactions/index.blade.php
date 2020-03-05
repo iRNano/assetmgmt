@@ -5,6 +5,9 @@
     <div class="col-lg-10 offset-lg-1">
         <h1>Transactions</h1>
         <a href="/dashboard" class="btn btn-info">Back to Dashboard</a>
+        @foreach(App\TransactionStatus::all() as $category)
+                <a href="/transactionFilter/{{$category->id}}" class="btn btn-info">{{$category->name}}</a>
+            @endforeach
         <table class="table table-striped">
             <thead>
                 <th>Transaction Number</th>

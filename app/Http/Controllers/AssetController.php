@@ -164,4 +164,14 @@ class AssetController extends Controller
 
         return view('assets.myassets', compact('transactions'));
     }
+
+    public function search(Request $request)
+    {
+        $assets = Asset::query()
+            ->where('brand', 'LIKE', "%$request->search%")
+            ->orWhere('model', 'LIKE',"%$request->search%")
+            ->get();
+
+        return view('assets.index', compact('assets'));
+    }
 }

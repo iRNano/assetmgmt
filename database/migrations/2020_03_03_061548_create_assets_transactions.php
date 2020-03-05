@@ -17,7 +17,9 @@ class CreateAssetsTransactions extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('asset_id');
             $table->unsignedBigInteger('transaction_id');
+            $table->string('serial_number')->nullable();
             $table->integer('quantity');
+
             $table->timestamps();
 
             $table->foreign('asset_id')

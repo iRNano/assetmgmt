@@ -4,11 +4,12 @@
 		<div class="col-lg-6 offset-lg-3">
             <form action="/assetDetails" method="POST">
                 @csrf
-
+                @if($category_id <= 2)
     		    <div class="form-group">
                     <label for="os">Operating System</label>
                     <input type="text" class="form-control" name="os">
                 </div>
+                @endif
 
                 <div class="form-group">
                     <label for="specs">Specifications</label>
@@ -27,6 +28,7 @@
                     <label for="warranty_date">Warranty End-Date</label>
                     <input type="date" class="form-control" name="warranty_date">
                 </div>
+                @if($category_id == 4)
                 <div class="software-view border border-danger">
                     <h4>Software -> to be hidden</h4>
                     <div class="form-group">
@@ -43,6 +45,7 @@
                         <input type="text" class="form-control" name="license">
                     </div>
                 </div>
+                @endif
                 <input type="hidden" name="assetID" value="{{$assetID}}">
                 <button type="submit" class="form-control btn btn-success">Add</button>
             </form>

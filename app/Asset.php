@@ -19,7 +19,7 @@ class Asset extends Model
     }
 
     public function transactions(){
-        return $this->belongsToMany(Transaction::class, 'assets_transactions')->withPivot('quantity')->withTimestamps();
+        return $this->belongsToMany(Transaction::class, 'assets_transactions')->withPivot('quantity', 'serial_number')->withTimestamps();
     }
     
 }

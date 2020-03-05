@@ -5,6 +5,7 @@
         <div class="col-lg-6 offset-lg-3 text-center">
             <h1>My Cart</h1>
             <a href="/transactions/create" class="btn btn-info">Add item</a>
+            <a href="/dashboard" class="btn btn-info">Back to Dashboard</a>
             <table class="table table-striped">
                 <thead>
                     <th>Category</th>
@@ -36,27 +37,29 @@
                             </form>
                         </td>
                     </tr>
-                    @empty 
-                    <tr>
-                        <td colspan="5" class="text-center">No Unsubmitted Requests</td>
-                    </tr>    
-                    @endforelse
-                    <tr>
+                     <tr>
                         <td></td>
                         <td></td>
                         <td>Total</td>
                         <td>{{$total}}</td>
                         <td></td>
                     </tr>
+                    @empty 
+                    <tr>
+                        <td colspan="5" class="text-center">No Unsubmitted Requests</td>
+                    </tr>    
+                    @endforelse
+                   
                 </tbody>
 
                 
             </table>
-
+            @if(count($details_of_items_in_cart) > 0)
             <form action="/transactions" method="POST">
                 @csrf
                 <button type="submit" class="btn btn-success">Confirm Request</button>
             </form>
+            @endif
         </div>
 
         

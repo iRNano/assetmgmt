@@ -17,8 +17,11 @@ class AssetDetailController extends Controller
 	}
 
     public function create(Request $request){
-    	$assetID = $request->id;
-    	return view('assetDetails.create', compact('assetID'));
+        $asset = Asset::where('id', $request->id)->first();
+        $category_id = $asset->category->id;
+        $assetID = $asset->id;
+    	// $assetID = $request->id;
+    	return view('assetDetails.create', compact('assetID', 'category_id'));
     }
 
     public function show(){
