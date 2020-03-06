@@ -203,17 +203,16 @@ class TransactionController extends Controller
     
     {
 
-        $status = TransactionStatus::where('id',$id)->first();
+        $status = TransactionStatus::where("id",$id)->first();
         $transactions = $status->transactions;
-        dd($transactions);
+    
         return view('transactions.index', compact('transactions'));
     }
 
     public function type($id)
     {
-        $type = TransactionType::query()->where('id',$id)->first();
+        $type = TransactionType::where('id',$id)->first();
         $transactions = $type->transactions;
-
-        dd($transactions);
+        return view('transactions.index', compact('transactions'));
     }
 }

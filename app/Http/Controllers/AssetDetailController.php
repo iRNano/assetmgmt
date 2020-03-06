@@ -37,6 +37,9 @@ class AssetDetailController extends Controller
     }
 
     public function store(Request $request){
+
+        $data = request()->validate(
+            ['serial_number' => "required|distinct"]);
     	$assetDetails = new AssetDetail();
 
     	$assetDetails->asset_id = $request->assetID;

@@ -16,17 +16,22 @@
             
                 <div class="form-group">
                     <label for="name">Username</label>
-                <input type="text" name="name" class="form-control" value="{{$profile->username}}">
+                <input type="text" name="username" class="form-control" value="{{$profile->username}}">
                 </div>
             
                 <div class="form-group">
                     <label for="name">Email</label>
-                <input type="text" name="name" class="form-control" value="{{$profile->email}}">
+                <input type="text" name="email" class="form-control" value="{{$profile->email}}">
                 </div>
             
                 <div class="form-group">
+                    {{-- <select name=""> --}}
+                        {{-- @foreach(App\Department::all as $department) --}}
+                    
+                        {{-- <option></option> --}}
+                    {{-- </select> --}}
                     <label for="name">Department</label>
-                <input type="text" name="name" class="form-control" value="{{$profile->department->name}}">
+                <input type="text" name="department" class="form-control" value="{{$profile->department->name}}">
                 </div>
 
                 <button type="submit" class="btn btn-success">Update</button>

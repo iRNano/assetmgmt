@@ -1,34 +1,35 @@
-@extends('layouts.app')
+@extends('userauth')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+<div class="container align-items-center" style="background-color: #EDEEF2;">
+    <div class="row d-flex align-self-center">
+        <div class="col-lg-12 align-items-center" id="cover "style="min-height: 100vh;">
+            <h1 class="text-center mt-5">Asset Mania</h1>
+            <div class="card align-self-center">
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        <div class="form-group row">
-                            <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+                        <div class="form-group">
+                            <label for="username" {{-- class="col-md-4 col-form-label text-md-right" --}}>{{ __('Username') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="email" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                            {{-- <div class="col-md-6"> --}}
+                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
 
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
+                            {{-- </div> --}}
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                        <div class="form-group">
+                            <label for="password" {{-- class="col-md-4 col-form-label text-md-right" --}}>{{ __('Password') }}</label>
 
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6"> --}}
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
@@ -36,11 +37,11 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
+                            {{-- </div> --}}
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
+                            {{-- <div class="col-md-6 offset-md-4"> --}}
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
@@ -70,4 +71,10 @@
         </div>
     </div>
 </div>
+
+<style>
+html body{
+    min-height: 100vh;
+}
+</style>
 @endsection

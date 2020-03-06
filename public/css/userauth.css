@@ -1,0 +1,33 @@
+html body * {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+#left-container{
+	background: url("/images/userauth.jpg");
+}
+.columbia-blue{
+	background-color: #BED8D4;
+}
+
+#cover{
+	  background-size: cover;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.card {
+	position: absolute;
+	top:25%;
+	width: 90%;
+	left:5%;
+}
+
+.nav{
+	position: absolute;
+	background-color: transparent;
+}

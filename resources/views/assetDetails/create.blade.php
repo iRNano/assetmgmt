@@ -20,7 +20,12 @@
                 <div class="form-group">
                     <label for="serial_number">Serial Number</label>
                     <input type="text" class="form-control" name="serial_number">
+
                 </div>
+                @error('serial_number') {{$message}} @enderror
+                {{-- @if($errors->has('serial_number'))
+                    <li>{{$errors->first('serial_number')}}</li>
+                @endif --}}
                 <div class="form-group">
                     <label for="purchase_date">Purchase Date</label>
                     <input type="date" class="form-control" name="purchase_date">
@@ -29,7 +34,7 @@
                     <label for="warranty_date">Warranty End-Date</label>
                     <input type="date" class="form-control" name="warranty_date">
                 </div>
-                @if($category_id == 4)
+                @if($category_id == 5)
                 <div class="software-view border border-danger">
                     <h4>Software -> to be hidden</h4>
                     <div class="form-group">

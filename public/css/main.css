@@ -1,0 +1,26 @@
+
+body{
+	font-family: 'Roboto', sans-serif;
+}
+
+.anti-white{
+	background-color: #C1C1C1;
+}
+.nav{
+
+	background-color: black;
+}
+#cover-image{
+	background: url("/images/cover3.jpg");
+	background-size: : cover;
+	min-height: 60vh;
+	background-position:center;
+	width: 100%;
+	margin:0;
+	background-repeat: no-repeat;
+}
+
+.container-fluid{
+	padding: 0;
+}
+

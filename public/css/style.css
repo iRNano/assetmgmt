@@ -65,14 +65,14 @@ a, a:hover, a:focus {
 
 #sidebar {
     /* don't forget to add all the previously mentioned styles here too */
-    background: rgb(33, 37, 41);
+    background: #2C4251;;
     color: #fff;
     transition: all 0.3s;
 }
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #273577;
+    background: #2C4251;
 }
 
 
@@ -119,7 +119,7 @@ a, a:hover, a:focus {
 }
 
 
-$sidebar.active ul ul a {
+#sidebar.active ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
     background: #6d7fcc;
@@ -154,6 +154,36 @@ $sidebar.active ul ul a {
     -webkit-transform: translateX(50%);
     -ms-transform: translateX(50%);
     transform: translateX(50%);
+}
+
+/*Dashboard*/
+
+#assetsDash{
+    background: #EF634A;
+    height: 150px;
+
+}
+
+#transactionsDash{
+    background: #FCCC7E;
+    height: 150px;
+}
+
+#usersDash{
+    background: #609B73;
+    height: 150px;
+}
+
+#cover-dash{
+    background-color: #D6EFFF;
+    min-height: 200px;
+    width: 100%;
+    padding: 1em;
+    margin: 1em 0;
+}
+
+p {
+    color: black;
 }
 /* Media query */
 

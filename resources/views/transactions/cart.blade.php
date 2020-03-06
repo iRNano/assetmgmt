@@ -37,19 +37,19 @@
                             </form>
                         </td>
                     </tr>
-                     <tr>
+                    
+                    @empty 
+                    <tr>
+                        <td colspan="5" class="text-center">No Unsubmitted Requests</td>
+                    </tr>    
+                    @endforelse
+                    <tr>
                         <td></td>
                         <td></td>
                         <td>Total</td>
                         <td>{{$total}}</td>
                         <td></td>
                     </tr>
-                    @empty 
-                    <tr>
-                        <td colspan="5" class="text-center">No Unsubmitted Requests</td>
-                    </tr>    
-                    @endforelse
-                   
                 </tbody>
 
                 

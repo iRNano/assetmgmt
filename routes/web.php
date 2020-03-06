@@ -13,11 +13,10 @@
 // Route::get('/register', 'RegisterController@showCustomRegForm');
 
 Route::get('/', function(){
-    return view('welcome');
+    return view('main');
 });
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-});
+Route::get('/dashboard', 'DashboardController@index');
+
 Route::get('/myassets', 'AssetController@myassets');
 Route::get('/assets/search', 'AssetController@search');
 Route::get("/filterCategory/{id}", 'CategoryController@filterCategory');
